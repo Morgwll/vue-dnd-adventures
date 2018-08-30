@@ -1,0 +1,102 @@
+[
+  { "pc": {
+      "cromgiven": {
+        "name": "Fulanito",
+        "portrait": "",
+        "age": 20,
+        "race": "Human",
+        "stats": {
+          "str": 16,
+          "con": 14,
+          "dex": 12,
+          "wis": 11,
+          "int": 13,
+          "cha": 9
+        }
+      },
+      "proficiency": 2,
+      "ac": 16,
+      "chclass": "Rogue",
+      "level": 1,
+      "cr": 1,
+      "weapons": [
+        {
+          "name": "Sword",
+          "minDmg": 1,
+          "maxDmg": 8,
+          "weight": 4,
+          "priceBuy": 20,
+          "priceSell": 10,
+          "crit": 20,
+          "reach": 5
+        },
+        {
+          "name": "Bow",
+          "minDmg": 1,
+          "maxDmg": 8,
+          "weight": 2,
+          "priceBuy": 4,
+          "priceSell": 2,
+          "crit": 20,
+          "reach": 60
+        }
+      ],
+      "spells": [],
+      "resistances": [],
+      "immunities": [],
+      "hitpoints": 25,
+      "inventory": [],
+      "money": 0
+    }
+  },
+  { "monster": {
+      "cromgiven": {
+        "name": "Elandro",
+        "portrait": "",
+        "age": 40,
+        "race": "Tiefling",
+        "stats": {
+          "str": 16,
+          "con": 14,
+          "dex": 12,
+          "wis": 11,
+          "int": 13,
+          "cha": 9
+        },
+        "proficiency": 3,
+        "ac": 14,
+        "chclass": "Warrior",
+        "level": 1,
+        "cr": 1,
+        "weapons": [
+          {
+            "name": "Sword",
+            "minDmg": 1,
+            "maxDmg": 8,
+            "weight": 4,
+            "priceBuy": 20,
+            "priceSell": 10,
+            "crit": 20,
+            "reach": 5
+          },
+          {
+            "name": "Bow",
+            "minDmg": 1,
+            "maxDmg": 8,
+            "weight": 2,
+            "priceBuy": 4,
+            "priceSell": 2,
+            "crit": 20,
+            "reach": 60
+          }
+        ],
+        "spells": [],
+        "resistances": [],
+        "immunities": [],
+        "hitpoints": 25,
+        "inventory": [],
+        "money": 0
+      }
+    }
+  }
+]
