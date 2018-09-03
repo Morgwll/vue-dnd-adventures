@@ -12,7 +12,10 @@
         menuItems: {
           home: 'Home',
           characters: 'Characters',
-          adventures: 'Adventures'
+          characterGenerator: 'Character Generator',
+          worldGenerator: 'World Generator',
+          pantheonGenerator: 'Pantheon Generator',
+          plotGenerator: 'Plot Generator',
         }
       }
     }

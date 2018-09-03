@@ -1,13 +1,13 @@
 <template>
   <div>
-    <being></being>
+    <app-being></app-being>
   </div>
 </template>
 <script>
-  import being from './Being.vue';
+  import appBeing from './Being.vue';
   export default {
     components: {
-      being
+      appBeing
     }
   }
 </script>
