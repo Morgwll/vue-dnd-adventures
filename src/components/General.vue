@@ -1,8 +1,8 @@
 <template>
   <div>
-    <app-character-creation></app-character-creation>
-    <app-map></app-map>
-    <app-group></app-group>
+    <app-character-creation v-if="selection.ccreation == true"></app-character-creation>
+    <app-map v-if="selection.map == true"></app-map>
+    <app-group v-if="selection.group == true"></app-group>
   </div>
 </template>
 <script>
@@ -19,9 +19,9 @@
     data() {
       return {
         selection: {
-          map: true,
+          map: false,
           group: false,
-          ccreation: false
+          ccreation: true
         }
       }
     }
