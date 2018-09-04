@@ -1,7 +1,7 @@
 <template>
   <div>
     <ul>
-      <li v-for="(item, index) in menuItems" :key="index">{{ item }}</li>
+      <li v-for="(item, index) in menuItems" :key="index"><button @click.prevent="item.link">{{ item.title }}</button></li>
     </ul>
   </div>
 </template>
@@ -10,12 +10,30 @@
     data() {
       return {
         menuItems: {
-          home: 'Home',
-          characters: 'Characters',
-          characterGenerator: 'Character Generator',
-          worldGenerator: 'World Generator',
-          pantheonGenerator: 'Pantheon Generator',
-          plotGenerator: 'Plot Generator',
+          home: {
+            title: 'Home',
+            link: '#'
+          },
+          characters: {
+            title: 'Characters',
+            link: '#'
+          },
+          characterGenerator: {
+            title: 'Character Generator',
+            link: '#'
+          },
+          worldGenerator: {
+            title: 'World Generator',
+            link: '#'
+          },
+          pantheonGenerator: {
+            title: 'Pantheon Generator',
+            link: '#'
+          },
+          plotGenerator: {
+            title: 'Plot Generator',
+            link: '#'
+          },
         }
       }
     }

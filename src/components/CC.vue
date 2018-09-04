@@ -14,20 +14,6 @@
       <option disabled value="">-- Select Alignment -- </option>
       <option v-for="(alignment, index) in alignments" :key="index">{{ alignment }}</option>
     </select>
-    <div class="">
-      <div>Strength: {{ stats.strength.abilityStat }}
-        <br>Ability Bonus Score: {{ stats.strength.abilityBonus }}</div>
-      <div>Constitution: {{ stats.constitution.abilityStat }}
-        <br>Ability Bonus Score: {{ stats.constitution.abilityBonus }}</div>
-      <div>Dexterity: {{ stats.dexterity.abilityStat }}
-        <br>Ability Bonus Score: {{ stats.dexterity.abilityBonus }}</div>
-      <div>Intelligence: {{ stats.intelligence.abilityStat }}
-        <br>Ability Bonus Score: {{ stats.intelligence.abilityBonus }}</div>
-      <div>Wisdom: {{ stats.wisdom.abilityStat }}
-        <br>Ability Bonus Score: {{ stats.wisdom.abilityBonus }}</div>
-      <div>Charisma: {{ stats.charisma.abilityStat }}
-        <br>Ability Bonus Score: {{ stats.charisma.abilityBonus }}</div>
-    </div>
     <button @click.prevent="statRoller" v-if="!classAvailable">Generate Stats</button>
     <button @click.prevent="classAvailable = false, reRoll = false" v-if="reRoll">Reroll?</button>
     <div v-if="classAvailable">
@@ -38,7 +24,7 @@
       </select>
     </div>
     <button v-if="(race != '') && !racialBonusApplied" @click.prevent="racialBonus()">Apply Racial Bonus</button>
-    <button @click.prevent="populateClasses(), classAvailable = true" v-if="!classChosen && classAvailable">Choose Class</button>
+    <button @click.prevent="populateClasses()" v-if="!classChosen && classes.length <= 0 && classAvailable">Choose Class</button>
     <div v-if="classes.length > 0">
       <span>Character class: </span>
       <select v-model="characterClass">
@@ -60,6 +46,20 @@
       <p>Alignment: {{ alignment }}</p>
       <p>Class: {{ characterClass }}</p>
       <p>Level: {{ level }}</p>
+      <div class="">
+        <div>Strength: {{ stats.strength.abilityStat }}
+          <br>Ability Bonus Score: {{ stats.strength.abilityBonus }}</div>
+        <div>Constitution: {{ stats.constitution.abilityStat }}
+          <br>Ability Bonus Score: {{ stats.constitution.abilityBonus }}</div>
+        <div>Dexterity: {{ stats.dexterity.abilityStat }}
+          <br>Ability Bonus Score: {{ stats.dexterity.abilityBonus }}</div>
+        <div>Intelligence: {{ stats.intelligence.abilityStat }}
+          <br>Ability Bonus Score: {{ stats.intelligence.abilityBonus }}</div>
+        <div>Wisdom: {{ stats.wisdom.abilityStat }}
+          <br>Ability Bonus Score: {{ stats.wisdom.abilityBonus }}</div>
+        <div>Charisma: {{ stats.charisma.abilityStat }}
+          <br>Ability Bonus Score: {{ stats.charisma.abilityBonus }}</div>
+      </div>
       <p>XP: {{ xp }}</p>
       <p>HP: {{ hp }}</p>
       <p>Race: {{ race }}</p>
@@ -132,10 +132,16 @@
           return Math.floor(Math.random() * (max - min + 1) ) + min;
         },
         bonusCalc(stat) {
-          return Math.floor(stat / 2 - 5);
+          return Math.floor((stat / 2) - 5);
         },
         statRoller() {
           let stats = this.stats;
+          /*console.log(this.stats);
+          for (var i = 0; i < this.stats; i++) {
+            console.log(this.stats[i]);
+            this.stats[i].abilityStat = this.dieroll(6,18);
+            this.stats[i].abilityBonus = this.bonusCalc(stats[i].abilityStat);
+          }*/
           stats.strength.abilityStat = this.dieroll(6,18);
           stats.strength.abilityBonus = this.bonusCalc(stats.strength.abilityStat);
           stats.dexterity.abilityStat = this.dieroll(6,18);
@@ -156,43 +162,42 @@
             this.classes.push('Cleric', 'Druid');
           }
           if(this.stats.strength.abilityStat >= 13) {
-            this.classes.push('Fighter', 'Barbarian');
+            this.classes.push('Fighter (STR)', 'Barbarian');
           }
           if(this.stats.dexterity.abilityStat >= 13) {
-            this.classes.push('Rogue');
+            this.classes.push('Rogue', 'Fighter (DEX)');
           }
           if(this.stats.intelligence.abilityStat >= 13) {
             this.classes.push('Wizard');
           }
           if(this.stats.charisma.abilityStat >= 13) {
-            this.classes.push('Sorcerer', 'Warlock');
+            this.classes.push('Sorcerer', 'Warlock', 'Bard');
           }
           if((this.stats.dexterity.abilityStat >= 13) && (this.stats.wisdom >= 13)) {
             this.classes.push('Monk', 'Ranger');
           }
+          if((this.stats.strength.abilityStat >= 13) && (this.stats.charisma >= 13)) {
+            this.classes.push('Paladin');
+          }
           this.reRoll = false;
         },
         leveling() {
-          if( this.characterClass == 'Rogue') {
-            this.hp = (5 * (this.level - 1) + 8 + (this.level * this.stats.constitution.abilityBonus));
-          } else if( this.characterClass == 'Wizard') {
+          if( this.characterClass == 'Wizard') {
             this.hp = (4 * (this.level - 1) + 6 + (this.level * this.stats.constitution.abilityBonus));
-          } else if( this.characterClass == 'Fighter') {
+          } else if(this.characterClass == 'Rogue' || 
+                    this.characterClass == 'Druid' || 
+                    this.characterClass == 'Sorcerer' ||
+                    this.characterClass == 'Bard' || 
+                    this.characterClass == 'Warlock' || 
+                    this.characterClass == 'Monk' || 
+                    this.characterClass == 'Ranger') {
+            this.hp = (5 * (this.level - 1) + 8 + (this.level * this.stats.constitution.abilityBonus));
+          } else if(this.characterClass == 'Fighter'||
+                    this.characterClass == 'Paladin'||
+                    this.characterClass == 'Cleric') {
             this.hp = (6 * (this.level - 1) + 10 + (this.level * this.stats.constitution.abilityBonus));
           } else if( this.characterClass == 'Barbarian') {
             this.hp = (7 * (this.level - 1) + 12 + (this.level * this.stats.constitution.abilityBonus));
-          } else if(this.characterClass == 'Druid') {
-            this.hp = (5 * (this.level - 1) + 8 + (this.level * this.stats.constitution.abilityBonus));
-          } else if(this.characterClass == 'Sorcerer') {
-            this.hp = (5 * (this.level - 1) + 8 + (this.level * this.stats.constitution.abilityBonus));
-          } else if(this.characterClass == 'Warlock') {
-            this.hp = (5 * (this.level - 1) + 8 + (this.level * this.stats.constitution.abilityBonus));
-          } else if( this.characterClass == 'Monk') {
-            this.hp = (5 * (this.level - 1) + 8 + (this.level * this.stats.constitution.abilityBonus));
-          } else if( this.characterClass == 'Ranger') {
-            this.hp = (5 * (this.level - 1) + 8 + (this.level * this.stats.constitution.abilityBonus));
-          } else if( this.characterClass == 'Cleric') {
-            this.hp = (6 * (this.level - 1) + 10 + (this.level * this.stats.constitution.abilityBonus));
           }
           if (this.level >= 4 && this.level <= 7) {
             this.proficiency = 3;
@@ -227,6 +232,16 @@
             this.inventory.push('Torch', 'Totem');
             this.armor.push('None');
             this.ac = 10 + this.stats.dexterity.abilityBonus + this.stats.constitution.abilityBonus;
+          } else if( this.characterClass == 'Bard') {
+            this.weapons.push('Short Bow', 'Rapier', 'Dagger');
+            this.inventory.push('Torch', 'Lute');
+            this.armor.push('Velvet Clothing');
+            this.ac = 13;
+          } else if( this.characterClass == 'Paladin') {
+            this.weapons.push('Battle Hammer');
+            this.inventory.push('Torch', 'Holy Sigil');
+            this.armor.push('Full Plate', 'Shield');
+            this.ac = 18;
           } else if(this.characterClass == 'Druid') {
             this.weapons.push('Bow', 'Short Sword', 'Dagger');
             this.inventory.push('Torch', 'Totem');
@@ -294,6 +309,7 @@
       },
       watch: {
         characterClass() {
+          this.leveling();
           this.classChosen = true;
         },
         level() {
