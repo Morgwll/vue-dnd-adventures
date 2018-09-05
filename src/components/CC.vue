@@ -14,7 +14,7 @@
       <option disabled value="">-- Select Alignment -- </option>
       <option v-for="(alignment, index) in alignments" :key="index">{{ alignment }}</option>
     </select>
-    <button @click.prevent="statRoller" v-if="!classAvailable">Generate Stats</button>
+    <button @click.prevent="statRoller()" v-if="!classAvailable">Generate Stats</button>
     <button @click.prevent="classAvailable = false, reRoll = false" v-if="reRoll">Reroll?</button>
     <div v-if="classAvailable">
       <span>Character Race: </span>
@@ -134,26 +134,16 @@
         bonusCalc(stat) {
           return Math.floor((stat / 2) - 5);
         },
+        statsCalc(stat) {
+          stat.abilityStat = this.dieroll(6,18);
+          stat.abilityBonus = this.bonusCalc(stat.abilityStat);
+        },
         statRoller() {
           let stats = this.stats;
-          /*console.log(this.stats);
-          for (var i = 0; i < this.stats; i++) {
-            console.log(this.stats[i]);
-            this.stats[i].abilityStat = this.dieroll(6,18);
-            this.stats[i].abilityBonus = this.bonusCalc(stats[i].abilityStat);
-          }*/
-          stats.strength.abilityStat = this.dieroll(6,18);
-          stats.strength.abilityBonus = this.bonusCalc(stats.strength.abilityStat);
-          stats.dexterity.abilityStat = this.dieroll(6,18);
-          stats.dexterity.abilityBonus = this.bonusCalc(stats.dexterity.abilityStat);       
-          stats.constitution.abilityStat = this.dieroll(6,18);
-          stats.constitution.abilityBonus = this.bonusCalc(stats.constitution.abilityStat);          
-          stats.intelligence.abilityStat = this.dieroll(6,18);
-          stats.intelligence.abilityBonus = this.bonusCalc(stats.intelligence.abilityStat);
-          stats.wisdom.abilityStat = this.dieroll(6,18);
-          stats.wisdom.abilityBonus = this.bonusCalc(stats.wisdom.abilityStat);
-          stats.charisma.abilityStat = this.dieroll(6,18);
-          stats.charisma.abilityBonus = this.bonusCalc(stats.charisma.abilityStat);
+          for(let i in stats) {
+            let stat = stats[i];
+            this.statsCalc(stat);
+          }
           this.classAvailable = true;
           this.reRoll = true;
         },
@@ -182,6 +172,7 @@
           this.reRoll = false;
         },
         leveling() {
+          // Class Availability
           if( this.characterClass == 'Wizard') {
             this.hp = (4 * (this.level - 1) + 6 + (this.level * this.stats.constitution.abilityBonus));
           } else if(this.characterClass == 'Rogue' || 
@@ -192,13 +183,15 @@
                     this.characterClass == 'Monk' || 
                     this.characterClass == 'Ranger') {
             this.hp = (5 * (this.level - 1) + 8 + (this.level * this.stats.constitution.abilityBonus));
-          } else if(this.characterClass == 'Fighter'||
+          } else if(this.characterClass == 'Fighter (STR)'||
+                    this.characterClass == 'Fighter (DEX)'||
                     this.characterClass == 'Paladin'||
                     this.characterClass == 'Cleric') {
             this.hp = (6 * (this.level - 1) + 10 + (this.level * this.stats.constitution.abilityBonus));
           } else if( this.characterClass == 'Barbarian') {
             this.hp = (7 * (this.level - 1) + 12 + (this.level * this.stats.constitution.abilityBonus));
           }
+          // Proficiency calculator
           if (this.level >= 4 && this.level <= 7) {
             this.proficiency = 3;
           } else if (this.level >= 8 && this.level <= 11) {
@@ -222,8 +215,13 @@
             this.inventory.push('Ink', 'Spell Reagents Pouch', 'SpellBook');
             this.armor.push('Robe');
             this.ac = 10;
-          } else if( this.characterClass == 'Fighter') {
+          } else if( this.characterClass == 'Fighter (STR)') {
             this.weapons.push('Long Bow', 'Long Sword', 'Hand Axe');
+            this.inventory.push('Torch', 'Playing Cards');
+            this.armor.push('Plate Armor', 'Shield');
+            this.ac = 19;
+          } else if( this.characterClass == 'Fighter (DEX)') {
+            this.weapons.push('Long Bow', 'Rapier', 'Hand Axe');
             this.inventory.push('Torch', 'Playing Cards');
             this.armor.push('Plate Armor', 'Shield');
             this.ac = 19;
