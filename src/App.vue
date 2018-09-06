@@ -40,7 +40,6 @@ export default {
   },
   computed: {
     testRoll() {
-      console.log("meh");
       console.log(this.dieRoller().dfour);
     }
   } 

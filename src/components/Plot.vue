@@ -7,49 +7,16 @@
 </template>
 <script>
   import appWeather from './Weather.vue';
+  import locations from '../location.json';
+  import plots from '../plots.json';
   export default {
     components: {
       appWeather
     },
     data() {
       return {
-        problem: {
-          characters: {
-            villain: {
-              status: ['noble', 'royal', 'high cleric', 'merchant', 'preacher', 'beggar', 'cult leader'],
-              motivation: ['treason','murder','greed for money','greed for land','greed for title','greed for the supernatural','lust for someone','justice','conquest','madness','affliction'],
-            },
-            neutral: {
-              status: ['noble', 'royal', 'high cleric', 'merchant', 'preacher', 'beggar', 'cult leader'],
-              motivation: ['treason','murder','greed for money','greed for land','greed for title','greed for the supernatural','lust for someone','justice','conquest','madness','affliction'],
-            },
-            ally: {
-              status: ['noble', 'royal', 'high cleric', 'merchant', 'preacher', 'beggar', 'cult leader'],
-              motivation: ['treason','murder','greed for money','greed for land','greed for title','greed for the supernatural','lust for someone','justice','conquest','madness','affliction'],
-            }
-          },
-          afflictions: ['a terrible plague', 'famine', 'extreme poverty', 'a terrible disease', 'a horrible curse', 'political distrust', 'a horrifying predator'],
-        },
-        plotTwist: ['in the end it is too late', 'it was all a ruse', 'an unknown curse comes in effect', 'the villain is the hero', 'unforeseen consequences', 'betrayed by the most beloved'],
-        deities: ['angry', 'disappointed', 'afflicted', 'absent', 'greedy', 'competitive'],
-        timeframe: {
-          months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-          year: 0,
-          month: 0,
-          day: 0,
-        },
-        history: ['war', 'peace', 'merging of houses', 'religious unrest', 'cultural unrest'],
-        location: {
-          size: ['an outpost', 'an area with a tavern', 'a village', 'a city'],
-          culture: {
-            religiousness: ['Secular', 'Religious'],
-            inclusiveness: ['mildly Racist', 'strongly racist', 'mildly sexist', 'strongly sexist', 'Inclusive', 'mildly xenophobic', 'strongly xenophobic'],
-            political: ['far-right', 'right', 'far-left', 'left']
-          },
-          government: ['aristocratic', 'republic', 'democratic', 'theocracy']
-        },
-        plotIntro: '',
-        theIssue: []
+        plot: plots,
+        location: locations
       }
     },
     methods: {
