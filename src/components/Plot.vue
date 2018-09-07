@@ -1,6 +1,6 @@
 <template>
 <div>
-  <div>{{ story }}</div>
+  <div>The adventure starts because of {{ story }}</div>
   <button @click.prevent="plotGenerator()">Generate Plot</button>
 </div>
 </template>
@@ -25,55 +25,22 @@
         var theInfo = bank[choices];
         return theInfo;
       },
-      mapPlot() {
-        var thePlot = plots;
-        var theStory = plots.map(function(thePlot) {
-          return thePlot;
-        });
-        return theStory;
-      },
-      characterSelector() {
-        var thePlot = plots;
-        thePlot[0]
+      chooseRandom(number) {
+        var choices = Math.floor(Math.random() * number.length);
+        return choices;
       },
       mainQuest() {
-        var theStory = this.mapPlot(plots);
-        var main = theStory[0].main;
+        var main = plots[0];
         var chosenMain = this.choosePlot(main);
-        console.log(chosenMain);
-        this.story.push(chosenMain);
-      },
-      sideQuest() {
-        var theStory = this.mapPlot(plots);
-        var side = theStory[1].side;
-        var chosenSide = this.choosePlot(side);
-        console.log(chosenSide);
-        this.story.push(chosenSide);
-      },
-      twistQuest() {
-        var theStory = this.mapPlot(plots);
-        var twist = theStory[2].plotTwists;
-        var chosenTwist = this.choosePlot(twist);
-        this.story.push(chosenTwist);
-      },
-      godQuest() {
-        var theStory = this.mapPlot(plots);
-        var god = theStory[3].deities;
-        var chosenDivine = this.choosePlot(god);
-        this.story.push(chosenDivine);
-      },
-      timeQuest() {
-        var theStory = this.mapPlot(plots);
-        var time = theStory[4].timeframe;
-        var chosenTime = this.choosePlot(time);
-        this.story.push(chosenTime);
+        var chosenWithin = this.choosePlot(chosenMain);
+        console.log(chosenWithin);
+        this.story.push(chosenWithin);
+        for(x in chosenWithin.length){
+          this.story.push(chosenWithin[x]);
+        }
       },
       plotGenerator() {
         this.mainQuest();
-        this.sideQuest();
-        this.twistQuest();
-        this.godQuest();
-        this.timeQuest();
       }
       /*getMonth(number) {
         const months = this.timeframe.months;
