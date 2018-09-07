@@ -8,6 +8,11 @@
     ]},
     {"characters": [
       {"villain": [
+        {"alignment": [
+          {"ce": "chaotic evil"},
+          {"ne": "neutral evil"},
+          {"le": "legal evil"}
+        ]},
         {"status": [
           {"noble": "descends from a noble house"},
           {"royal": "is part of the royal family"},
@@ -37,6 +42,11 @@
         ]}
       ]},
       {"neutral": [
+        {"alignment": [
+          {"cn": "chaotic neutral"},
+          {"nn": "true neutral"},
+          {"ln": "legal neutral"}
+        ]},
         {"status": [
           {"noble": "descends from a noble house"},
           {"royal": "is part of the royal family"},
@@ -63,6 +73,11 @@
         ]}
       ]},
       {"ally": [
+        {"alignment": [
+          {"cg": "chaotic good"},
+          {"ng": "neutral good"},
+          {"lg": "legal good"}
+        ]},
         {"status": [
           {"noble": "descends from a noble house"},
           {"royal": "is part of the royal family"},
@@ -99,6 +114,11 @@
     ]},
     {"characters": [
       {"villain": [
+        {"alignment": [
+          {"ce": "chaotic"},
+          {"ne": "neutral"},
+          {"le": "legal"}
+        ]},
         {"status": [
           {"noble": "descends from a noble house"},
           {"royal": "is part of the royal family"},
@@ -110,6 +130,11 @@
         ]}
       ]},
       {"neutral": [
+        {"alignment": [
+          {"cn": "chaotic"},
+          {"nn": "neutral"},
+          {"ln": "legal"}
+        ]},
         {"status": [
           {"noble": "descends from a noble house"},
           {"royal": "is part of the royal family"},
@@ -121,6 +146,11 @@
         ]}
       ]},
       {"ally": [
+        {"alignment": [
+          {"cg": "chaotic"},
+          {"ng": "neutral"},
+          {"lg": "legal"}
+        ]},
         {"status": [
           {"noble": "descends from a noble house"},
           {"royal": "is part of the royal family"},
