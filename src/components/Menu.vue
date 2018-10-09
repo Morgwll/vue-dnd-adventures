@@ -18,6 +18,10 @@
             title: 'Characters',
             link: '#'
           },
+          combatSimulator: {
+            title: 'Combat Simulator',
+            link: '#'
+          },
           characterGenerator: {
             title: 'Character Generator',
             link: '#'

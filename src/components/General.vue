@@ -2,6 +2,7 @@
   <div>
     <app-character-creation v-if="selection.ccreation == true"></app-character-creation>
     <app-map v-if="selection.map == true"></app-map>
+    <app-combat-simulator v-if="selection.combatSimulator"></app-combat-simulator>
     <app-plot-creation v-if="selection.plotCreation == true"></app-plot-creation>
     <app-group v-if="selection.group == true"></app-group>
   </div>
@@ -10,6 +11,7 @@
   import appMap from './Map.vue';
   import appGroup from './Group.vue';
   import appCharacterCreation from './CC.vue';
+  import appCombatSimulator from './Combat.vue';
   import appPlotCreation from './Plot.vue';
 
   export default {
@@ -17,6 +19,7 @@
       appMap,
       appGroup,
       appPlotCreation,
+      appCombatSimulator,
       appCharacterCreation,
     },
     data() {
@@ -25,7 +28,8 @@
           map: false,
           group: false,
           ccreation: false,
-          plotCreation: true
+          combatSimulator: true,
+          plotCreation: false
         }
       }
     }
