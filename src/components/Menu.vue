@@ -1,7 +1,7 @@
 <template>
   <div>
     <ul>
-      <li v-for="(item, index) in menuItems" :key="index"><button @click.prevent="item.link">{{ item.title }}</button></li>
+      <li v-for="(item, index) in menuItems" :key="index"><button @click.prevent="$emit('selectItem', $event.item)">{{ item.title }}</button></li>
     </ul>
   </div>
 </template>

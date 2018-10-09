@@ -15,6 +15,7 @@
   import appPlotCreation from './Plot.vue';
 
   export default {
+    props: ['chosenItem'],
     components: {
       appMap,
       appGroup,
@@ -27,8 +28,8 @@
         selection: {
           map: false,
           group: false,
-          ccreation: false,
-          combatSimulator: true,
+          ccreation: true,
+          combatSimulator: false,
           plotCreation: false
         }
       }

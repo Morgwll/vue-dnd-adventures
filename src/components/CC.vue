@@ -1,6 +1,7 @@
 <template>
   <div>
     <input placeholder="Character's Name" id="name" v-model="name" type="text">
+    <button @click="name = nameGenerator()">Generate Name</button>
     <input placeholder="Character's Age" id="age" v-model="age" type="number">
     <div>
       <input type="radio" id="male" value="Male" v-model="gender">
@@ -72,7 +73,9 @@
   </div>
 </template>
 <script>
+import nameGenerator from "../nameGenerator.js";
     export default {
+      mixins: [nameGenerator],
       data() {
        return {
             name: '',
