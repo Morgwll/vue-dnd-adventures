@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ul>
+    <ul class="main-menu">
       <li v-for="(item, index) in menuItems" :key="index"><button @click.prevent="$emit('selectItem', $event.item)">{{ item.title }}</button></li>
     </ul>
   </div>
@@ -43,3 +43,13 @@
     }
   }
 </script>
+<style lang="scss">
+  .main-menu {
+    list-style-type: none;
+    padding: 20px;
+    li {
+      padding: 10px;
+      float: left;
+    }
+  }
+</style>

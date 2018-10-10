@@ -8,7 +8,7 @@
   import appWeather from './Weather.vue';
   import locations from '../location.json';
   import plots from '../plots.json';
-  import nameGenerator from '../nameGenerator.js';
+  import nameGenerator from '../mixins/nameGenerator.js';
   export default {
     mixins: [nameGenerator],
     components: {

@@ -41,39 +41,69 @@
     </div>
     <button v-if="(characterClass != '') && !classBonusApplied" @click.prevent="classCalc()">Calculate Class Bonuses</button>
     <div class="character-sheet">
-      <p>Name: {{ name }}</p>
-      <p>Age: {{ age }}</p>
-      <p>Gender: {{ gender }}</p>
-      <p>Alignment: {{ alignment }}</p>
-      <p>Class: {{ characterClass }}</p>
-      <p>Level: {{ level }}</p>
-      <div class="">
-        <div>Strength: {{ stats.strength.abilityStat }}
-          <br>Ability Bonus Score: {{ stats.strength.abilityBonus }}</div>
-        <div>Constitution: {{ stats.constitution.abilityStat }}
-          <br>Ability Bonus Score: {{ stats.constitution.abilityBonus }}</div>
-        <div>Dexterity: {{ stats.dexterity.abilityStat }}
-          <br>Ability Bonus Score: {{ stats.dexterity.abilityBonus }}</div>
-        <div>Intelligence: {{ stats.intelligence.abilityStat }}
-          <br>Ability Bonus Score: {{ stats.intelligence.abilityBonus }}</div>
-        <div>Wisdom: {{ stats.wisdom.abilityStat }}
-          <br>Ability Bonus Score: {{ stats.wisdom.abilityBonus }}</div>
-        <div>Charisma: {{ stats.charisma.abilityStat }}
-          <br>Ability Bonus Score: {{ stats.charisma.abilityBonus }}</div>
+      <div class="character-name">Name: {{ name }}</div>
+      <div class="character-age">Age: {{ age }}</div>
+      <div class="character-gender">Gender: {{ gender }}</div>
+      <div class="character-alignment">Alignment: {{ alignment }}</div>
+      <div class="character-class">Class: {{ characterClass }}</div>
+      <div class="character-level">Level: {{ level }}</div>
+      <div class="character-experience">XP: {{ xp }}</div>
+      <div class="character-hitpoints">HP: {{ hp }}</div>
+      <div class="character-race">Race: {{ race }}</div>
+      <div class="character-ac">AC: {{ ac }}</div>
+      <div class="character-proficiency">proficiency: +{{ proficiency }}</div>
+      <div class="character-armor">Armor: <span v-for="(item, index) in armor" :key="index">{{ item }}, </span></div>
+      <div v-if="spells.length > 0">Spells: <span v-for="(item, index) in spells" :key="index">{{ item }},</span></div>
+      <div class="stats">
+        <div class="stat">STR: {{ stats.strength.abilityStat }}
+          <br>
+          <div class="bonus">
+            Bonus: 
+            <div class="bonus-stat">{{ stats.strength.abilityBonus }}</div>
+          </div>
+        </div>
+        <div class="stat">CON {{ stats.constitution.abilityStat }}
+          <br>
+          <div class="bonus">
+            Bonus: 
+            <div class="bonus-stat">{{ stats.constitution.abilityBonus }}</div>
+          </div>
+        </div>
+        <div class="stat">DEX: {{ stats.dexterity.abilityStat }}
+          <br>
+          <div class="bonus">
+            Bonus: 
+            <div class="bonus-stat">{{ stats.dexterity.abilityBonus }}</div>
+          </div>
+        </div>
+        <div class="stat">INT: {{ stats.intelligence.abilityStat }}
+          <br>
+          <div class="bonus">
+            Bonus: 
+            <div class="bonus-stat">{{ stats.intelligence.abilityBonus }}</div>
+          </div>
+        </div>
+        <div class="stat">WIS {{ stats.wisdom.abilityStat }}
+          <br>
+          <div class="bonus">
+            Bonus: 
+            <div class="bonus-stat">{{ stats.wisdom.abilityBonus }}</div>
+          </div>
+        </div>
+        <div class="stat">CHA {{ stats.charisma.abilityStat }}
+          <br>
+          <div class="bonus">
+            Bonus: 
+            <div class="bonus-stat">{{ stats.charisma.abilityBonus }}</div>
+          </div>
+        </div>
       </div>
-      <p>XP: {{ xp }}</p>
-      <p>HP: {{ hp }}</p>
-      <p>Race: {{ race }}</p>
-      <p>Armor: <span v-for="(item, index) in armor" :key="index">{{ item }}, </span></p>
-      <p>AC: {{ ac }}</p>
-      <p>proficiency: +{{ proficiency }}</p>
-      <p v-if="spells.length > 0">Spells: <span v-for="(item, index) in spells" :key="index">{{ item }},</span></p>
       <p>Inventory: <span v-for="(item, index) in inventory" :key="index">{{ item }},</span></p>
     </div>
   </div>
 </template>
 <script>
-import nameGenerator from "../nameGenerator.js";
+import nameGenerator from "../mixins/nameGenerator.js";
     export default {
       mixins: [nameGenerator],
       data() {
@@ -319,3 +349,35 @@ import nameGenerator from "../nameGenerator.js";
       }
     }
 </script>
+<style lang="scss">
+  .character-sheet {
+    border: 1px solid #c1c1c1;
+    padding: 20px;
+    margin: 20px;
+    .stats {
+      border: 1px solid #c1c1c1;
+      padding: 20px;
+      margin: 20px auto;
+      width: calc(100% - 40px);
+      max-width: 600px;
+      font-size: 1.6rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      .stat {
+        max-width: 15%;
+        margin: 10px;
+        border-radius: 4px;
+        border: 1px solid #c1c1c1;
+        text-align: center;
+          .bonus {
+          font-size: .8rem;
+          .bonus-stat {
+            font-size: 1.6rem;
+            font-weight: bold;
+          }
+        }
+      }
+    }
+  }
+</style>

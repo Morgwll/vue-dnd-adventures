@@ -10,7 +10,7 @@
 import appHeader from './components/Header.vue';
 import appGeneral from './components/General.vue';
 import appFooter from './components/Footer.vue';
-import dieRoller from './dieroller.js';
+import dieRoller from './mixins/dieroller.js';
 
 export default {
   mixins: [dieRoller],
