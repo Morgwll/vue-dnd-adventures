@@ -19,11 +19,6 @@ export default {
     appGeneral,
     appFooter,
   },
-  data () {
-    return {
-      msg: 'Welcome to Your Vue.js App'
-    }
-  },
   computed: {
     testRoll() {
       console.log(this.dieRoller().dfour);
@@ -31,3 +26,24 @@ export default {
   } 
 }
 </script>
+<style lang="scss">
+html {
+  color: #fff;
+  background-color: #000;
+  font-family: 'MedievalSharp';
+  button {
+    padding: 5px 10px;
+    border-radius: 4px;
+    border: 2px solid #c1c1c1;
+    background-color: #f2ddae;
+    font-family: 'MedievalSharp';
+    font-weight: 700;
+    cursor: pointer;
+  }
+  input, select {
+    padding: 5px 10px;
+    border-radius: 4px;
+    border: 2px solid #c1c1c1;
+  }
+}
+</style>

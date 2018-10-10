@@ -1,8 +1,8 @@
 <template>
-<div>
-  <div>{{ story }}</div>
-  <button @click.prevent="plotGenerator()">Generate Plot</button>
-</div>
+  <div class="plot-generator">
+    <button @click.prevent="plotGenerator()">Generate Plot</button>
+    <div>{{ story }}</div>
+  </div>
 </template>
 <script>
   import appWeather from './Weather.vue';
@@ -146,3 +146,9 @@
     }
   }
 </script>
+<style lang="scss">
+  .plot-generator {
+    width: 100%;
+    padding: 10px;
+  }
+</style>

@@ -1,10 +1,11 @@
 <template>
   <div>
-    <app-character-creation v-if="selection.ccreation == true"></app-character-creation>
-    <app-map v-if="selection.map == true"></app-map>
-    <app-combat-simulator v-if="selection.combatSimulator"></app-combat-simulator>
-    <app-plot-creation v-if="selection.plotCreation == true"></app-plot-creation>
-    <app-group v-if="selection.group == true"></app-group>
+    <div class="main-menu">
+      <ul>
+        <li v-for="(item, index) in menuItems" :key="index"><button @click.prevent="selection = item.link">{{ item.title }}</button></li>
+      </ul>
+    </div>
+    <component :is="selection"></component>
   </div>
 </template>
 <script>
@@ -15,7 +16,6 @@
   import appPlotCreation from './Plot.vue';
 
   export default {
-    props: ['chosenItem'],
     components: {
       appMap,
       appGroup,
@@ -25,14 +25,50 @@
     },
     data() {
       return {
-        selection: {
-          map: false,
-          group: false,
-          ccreation: true,
-          combatSimulator: false,
-          plotCreation: false
+        selection: appPlotCreation,
+        menuItems: {
+          home: {
+            title: 'Home',
+            link: '#'
+          },
+          characterGenerator: {
+            title: 'Character Generator',
+            link: appCharacterCreation
+          },
+          characters: {
+            title: 'Characters',
+            link: appGroup
+          },
+          worldGenerator: {
+            title: 'World Generator',
+            link: appMap
+          },
+          pantheonGenerator: {
+            title: 'Pantheon Generator',
+            link: '#'
+          },
+          plotGenerator: {
+            title: 'Plot Generator',
+            link: appPlotCreation
+          },
+          combatSimulator: {
+            title: 'Combat Simulator',
+            link: appCombatSimulator
+          }
         }
       }
     }
   }
 </script>
+<style lang="scss">
+  .main-menu {
+    ul{
+      list-style-type: none;
+      display: flex;
+      padding-left: 0;
+      li {
+        padding: 10px;
+      }
+    }
+  }
+</style>

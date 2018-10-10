@@ -41,19 +41,23 @@
     </div>
     <button v-if="(characterClass != '') && !classBonusApplied" @click.prevent="classCalc()">Calculate Class Bonuses</button>
     <div class="character-sheet">
-      <div class="character-name">Name: {{ name }}</div>
-      <div class="character-age">Age: {{ age }}</div>
-      <div class="character-gender">Gender: {{ gender }}</div>
-      <div class="character-alignment">Alignment: {{ alignment }}</div>
-      <div class="character-class">Class: {{ characterClass }}</div>
-      <div class="character-level">Level: {{ level }}</div>
-      <div class="character-experience">XP: {{ xp }}</div>
-      <div class="character-hitpoints">HP: {{ hp }}</div>
-      <div class="character-race">Race: {{ race }}</div>
-      <div class="character-ac">AC: {{ ac }}</div>
-      <div class="character-proficiency">proficiency: +{{ proficiency }}</div>
-      <div class="character-armor">Armor: <span v-for="(item, index) in armor" :key="index">{{ item }}, </span></div>
-      <div v-if="spells.length > 0">Spells: <span v-for="(item, index) in spells" :key="index">{{ item }},</span></div>
+      <div class="character-info">
+        <div class="character-name">Name: {{ name }}</div>
+        <div class="character-age">Age: {{ age }}</div>
+        <div class="character-gender">Gender: {{ gender }}</div>
+        <div class="character-alignment">Alignment: {{ alignment }}</div>
+        <div class="character-class">Class: {{ characterClass }}</div>
+        <div class="character-level">Level: {{ level }}</div>
+        <div class="character-experience">XP: {{ xp }}</div>
+        <div class="character-race">Race: {{ race }}</div>
+        <div class="character-armor">Armor: <span v-for="(item, index) in armor" :key="index">{{ item }}, </span></div>
+        <div v-if="spells.length > 0">Spells: <span v-for="(item, index) in spells" :key="index">{{ item }},</span></div>
+      </div>
+      <div class="character-stats-blocks">
+        <div class="hitpoints">HP: <div class="amount">{{ hp }}</div></div>
+        <div class="ac">AC: <div class="amount">{{ ac }}</div></div>
+        <div class="proficiency">proficiency: <div class="amount">+{{ proficiency }}</div></div>
+      </div>
       <div class="stats">
         <div class="stat">STR: {{ stats.strength.abilityStat }}
           <br>
@@ -353,11 +357,44 @@ import nameGenerator from "../mixins/nameGenerator.js";
   .character-sheet {
     border: 1px solid #c1c1c1;
     padding: 20px;
-    margin: 20px;
+    margin: 10px;
+    .character {
+      &-info, &-stats-blocks {
+        border-radius: 4px;
+        border: 1px solid #c1c1c1;
+        width: 50%;
+        max-width: 350px;
+        float: left;
+        margin: 10px;
+      }
+      &-info {
+      .character {
+        &-name, &-age, &-gender, &-alignment, &-class, &-level, &-experience, &-race, &-armor {
+          margin: 5px 10px;
+          text-align: left;
+          min-width: 120px;
+          }
+        }
+      }
+      &-stats-blocks {
+        max-width: 160px;
+        width: 100%;
+        .hitpoints, .ac, .proficiency {
+          text-align: center;
+          font-size: 1.2rem;
+          border-radius: 4px;
+          border: 1px solid #c1c1c1;
+          margin: 10px 5px;
+          .amount {
+            font-size: 2rem;
+          }
+        }
+      }
+    }
     .stats {
       border: 1px solid #c1c1c1;
       padding: 20px;
-      margin: 20px auto;
+      margin: 40px auto;
       width: calc(100% - 40px);
       max-width: 600px;
       font-size: 1.6rem;
@@ -365,8 +402,7 @@ import nameGenerator from "../mixins/nameGenerator.js";
       align-items: center;
       justify-content: center;
       .stat {
-        max-width: 15%;
-        margin: 10px;
+        margin: 5px;
         border-radius: 4px;
         border: 1px solid #c1c1c1;
         text-align: center;
